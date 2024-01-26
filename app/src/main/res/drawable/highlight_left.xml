@@ -1,0 +1,11 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <!-- Oval on the Right -->
+    <item android:left="250dp" android:right="0dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/secondary_color_alt" />
+        </shape>
+    </item>
+
+</layer-list>

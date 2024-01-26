@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">Goalbit</string>
+    <string name="title_activity_forgot_password">ForgotPassword</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <!--Option for dropdown-->
+
+    <string name="save">SAVE</string>
+    <string name="pause">PAUSE</string>
+    <string name="select">Select a goal</string>
+    <string name="habit">habit</string>
+    <string name="update">Update</string>
+    <string name="update_success">Updated Successfully</string>
+    <string name="save_success">Saved Successfully</string>
+    <string name="name_empty">Name is empty</string>
+    <string name="dialog_message">Your habit need attention: </string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="select_a_duration">Select a duration</string>
+    <string name="select_end_date">Select End Date</string>
+    <string name="title_activity_habit_view_historic">habit_view_historic</string>
+    <string name="create_a_new_habit">Create a new Habit</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="remind_me_at">Remind me at...</string>
+    <string name="repeat">Repeat</string>
+    <string name="sun">sun</string>
+    <string name="mon">mon</string>
+    <string name="tue">tue</string>
+    <string name="wed">wed</string>
+    <string name="thu">thu</string>
+    <string name="fri">fri</string>
+    <string name="sat">sat</string>
+    <string name="daily_goal">Daily goal</string>
+    <string name="select_the_timer">Select the timer</string>
+    <string name="create_a_habit">Create a Habit</string>
+    <string name="icon_select">IconSelect</string>
+    <string name="welcome">Welcome</string>
+    <string name="to_access_and_save_your_habits_kindly_log_in_with_google">To access and save your habits, kindly log in with Google.</string>
+    <string name="google_icon">GoogleIcon</string>
+    <string name="delete">delete</string>
+    <string name="current_strike">Current Strike</string>
+    <string name="zero">0</string>
+    <string name="strike_icon">StrikeIcon</string>
+    <string name="habit_icon">HabitIcon</string>
+    <string name="habit_finished">Habit Finished</string>
+    <string name="habits_analytics">habits analytics</string>
+    <string name="hi">Hi,</string>
+    <string name="backup_and_synchronized">Backup and Synchronized</string>
+    <string name="image_profile">imageProfile</string>
+    <string name="logout">logout</string>
+    <string name="image_icon">imageicon</string>
+    <string name="duration">Duration</string>
+    <string name="timeStamp">00:00:00</string>
+    <string name="start">START</string>
+    <string name="done">Done</string>
+</resources>
