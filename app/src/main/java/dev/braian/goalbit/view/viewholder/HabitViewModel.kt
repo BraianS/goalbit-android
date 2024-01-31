@@ -266,14 +266,13 @@ class HabitViewModel : ViewModel() {
 
             habitDatabase.orderByChild("dateEnd")
                 .addValueEventListener(object : ValueEventListener {
+
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         val habitList = mutableListOf<Pair<Habit, DailyActivity?>>()
 
                         for (habitSnapshot in dataSnapshot.children) {
 
-                            var habit = habitSnapshot.getValue(Habit::class.java)
-
-                            habitSnapshot.getValue(Habit::class.java)?.run {
+                          habitSnapshot.getValue(Habit::class.java)?.run {
 
                                 if (this.userId == userId) {
                                     val hasWeek =

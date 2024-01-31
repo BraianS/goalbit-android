@@ -6,6 +6,7 @@ import android.content.Context
 import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import dev.braian.goalbit.R
@@ -45,10 +46,9 @@ class HabitViewHolder(private val bind: HabitViewBinding, private val listener: 
     private fun updateDailyActivity(done: Boolean) {
         bind.checkBoxDone.isChecked = done
         habitViewModel.updateDailyActivity(habitId, selectedDate, done)
-
     }
 
-    private fun bindCHeckbox(habit:Habit, dailyActivity:DailyActivity?){
+    private fun bindCHeckbox(habit: Habit, dailyActivity: DailyActivity?) {
         if (habit.goal == GoalType.Off) {
 
             if (dailyActivity == null) {
@@ -75,13 +75,19 @@ class HabitViewHolder(private val bind: HabitViewBinding, private val listener: 
             countDownTimer()
             bind.textDuration.visibility = View.VISIBLE
 
-            if (dailyActivity == null || dailyActivity?.done == false) {
+            if (dailyActivity == null) {
                 bind.checkBoxDone.isChecked = false
                 newDuration = habit.duration!!
                 ColorUtils.setHabitUnchecked(bind.cardView, itemView.context)
             }
 
-            if (dailyActivity!= null || dailyActivity?.done == true) {
+            if (dailyActivity?.done == false) {
+                bind.checkBoxDone.isChecked = false
+                newDuration = dailyActivity.duration
+                ColorUtils.setHabitUnchecked(bind.cardView, itemView.context)
+            }
+
+            if (dailyActivity?.done == true) {
                 bind.checkBoxDone.isChecked = true
                 newDuration = dailyActivity.duration
                 ViewAnimationUtil.animateAndMakeInvisible(bind.cardBackDuration)
@@ -134,15 +140,14 @@ class HabitViewHolder(private val bind: HabitViewBinding, private val listener: 
             listener.onEdit(habit.id!!)
         }
 
-        bindCHeckbox(habit,dailyActivity)
+        bindCHeckbox(habit, dailyActivity)
 
         bind.checkBoxDone.setOnClickListener {
 
             if (habit.goal == GoalType.Off) {
                 if (dailyActivity == null) {
                     updateDailyActivity(true)
-                }
-               else if (dailyActivity != null && dailyActivity.done == true) {
+                } else if (dailyActivity != null && dailyActivity.done == true) {
                     updateDailyActivity(false)
                     ColorUtils.setHabitUnchecked(bind.cardView, itemView.context)
                 } else if (dailyActivity != null && dailyActivity.done == false) {
@@ -151,36 +156,14 @@ class HabitViewHolder(private val bind: HabitViewBinding, private val listener: 
                 }
             }
 
-
-
-            if(habit.goal == GoalType.Duration){
-                if ( dailyActivity?.done == false) {
+            if (habit.goal == GoalType.Duration) {
+                if (dailyActivity?.done == false) {
                     ViewAnimationUtil.animateAndMakeVisible(bind.cardBackDuration)
-                }
-
-                else if (dailyActivity?.done == true) {
-                    habitViewModel.saveDailyDuration(habitId, selectedDate, habit.duration!!)
-                }
-
-                else if (bind.checkBoxDone.isChecked ) {
-
                     bind.checkBoxDone.visibility = View.INVISIBLE
                     bind.checkBowToggleTimer.visibility = View.VISIBLE
 
-                    newDuration = habit.duration!!
-                    ViewAnimationUtil.animateAndMakeVisible(bind.cardBackDuration)
-
-                } else if (!bind.checkBoxDone.isChecked && dailyActivity != null) {
-
-                    bind.checkBoxDone.isChecked = false
-                    ColorUtils.setHabitUnchecked(bind.cardView, itemView.context)
-
-                    habitViewModel.finishDailyActivity(
-                        habit.id!!,
-                        selectedDate,
-                        habit.duration!!,
-                        false
-                    )
+                } else if (dailyActivity?.done == true) {
+                    updateDailyActivity(false)
                 }
             }
 
@@ -225,7 +208,20 @@ class HabitViewHolder(private val bind: HabitViewBinding, private val listener: 
                     counterDownTimer?.cancel()
                     bind.countDownButton.text = context.getString(R.string.start)
                     timerRunning = false
+                    Toast.makeText(
+                        context,
+                        "Pausado,  timeRunning: $timerRunning",
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                    habitViewModel.saveDailyDuration(habitId, selectedDate, newDuration)
+
                 } else {
+                    Toast.makeText(
+                        context,
+                        "Continuou, timeRunning: $timerRunning",
+                        Toast.LENGTH_LONG
+                    ).show()
                     start()
                     bind.countDownButton.setOnLongClickListener { it ->
                         habitViewModel.saveDailyDuration(habitId, selectedDate, newDuration)
@@ -249,6 +245,7 @@ class HabitViewHolder(private val bind: HabitViewBinding, private val listener: 
             }
 
             override fun onFinish() {
+                Toast.makeText(context, "Countdown terminou", Toast.LENGTH_LONG).show()
                 habitViewModel.saveDailyDuration(habitId, selectedDate, newDuration)
             }
         }
@@ -262,6 +259,7 @@ class HabitViewHolder(private val bind: HabitViewBinding, private val listener: 
             }
 
             override fun onFinish() {
+                habitViewModel.finishDailyActivity(habitId, selectedDate, newDuration, true)
                 updateTimer()
             }
         }.start()
