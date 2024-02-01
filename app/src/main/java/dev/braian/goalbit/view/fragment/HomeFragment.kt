@@ -186,7 +186,7 @@ class HomeFragment : Fragment() {
 
 
                 val colorRes = if (day.date == selectedDateLocal) {
-                    R.color.white
+                    R.color.primary_color
                 } else {
                     R.color.black
                 }

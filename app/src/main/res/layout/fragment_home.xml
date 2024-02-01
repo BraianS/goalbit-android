@@ -15,13 +15,14 @@
         android:layout_height="wrap_content"
         android:text="@string/hi"
         android:paddingBottom="10sp"
-        android:textColor="@color/primary_color"
+        android:textColor="@color/white"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:textColor="@color/primary_color"
+        android:text="@string/month"
+        android:textColor="@color/white"
         android:id="@+id/monthText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,12 +42,6 @@
         app:cv_monthHeaderResource="@layout/calendar_month_header_layout"
         app:cv_orientation="horizontal"
         app:cv_outDateStyle="endOfRow" />
-
-    <com.kizitonwose.calendar.view.CalendarView
-        android:id="@+id/calendarView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cv_dayViewResource="@layout/calendar_day_layout" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleViewHabit"

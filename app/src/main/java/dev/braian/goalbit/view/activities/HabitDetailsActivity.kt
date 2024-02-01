@@ -62,6 +62,7 @@ class HabitDetailsActivity : AppCompatActivity() {
             binding.textViewFinished.text = DailyActivityUtil.sumDoneActivities(it)
             binding.calendarView.selectionMode = MaterialCalendarView.SELECTION_MODE_NONE
 
+
             binding.calendarView.addDecorator(object :
                 com.prolificinteractive.materialcalendarview.DayViewDecorator {
 

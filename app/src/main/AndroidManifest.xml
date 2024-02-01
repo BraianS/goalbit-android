@@ -31,11 +31,6 @@
         </receiver>
 
         <activity
-            android:theme="@style/Theme.AppCompat"
-            android:name=".view.activities.LoginActivity"
-            android:exported="false">
-        </activity>
-        <activity
             android:name=".view.activities.AddHabitFormActivity"
             android:exported="false" />
         <activity

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF1A1A1A</color>
+    <color name="white">#FFFFFF</color>
+    <color name="primary_color">#B4B4B4</color>
+    <color name="secondary_color">#FF6B7D</color>
+
+    <color name="secondary_color_alt">#527B9F</color>
+
+    <color name="button_done">#5A8E64</color>
+
+    <color name="red">#FF3232</color>
+
+    <color name="habit_finished">#353535</color>
+
+    <color name="transparent">#00000000</color>
+
+    <color name="habit_analytic_color">#FFFFFF</color>
+</resources>

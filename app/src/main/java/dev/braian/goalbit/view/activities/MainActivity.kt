@@ -4,6 +4,7 @@ package dev.braian.goalbit.view.activities
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        window.statusBarColor = ContextCompat.getColor(this,R.color.secondary_color_alt)
     }
 
     private fun displayFragment(fragment: Fragment) {

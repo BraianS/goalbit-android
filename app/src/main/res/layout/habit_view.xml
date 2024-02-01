@@ -6,7 +6,6 @@
     android:layout_marginBottom="20dp"
     android:orientation="vertical">
 
-
     <CheckBox
         android:id="@+id/checkBoxDone"
         android:layout_width="wrap_content"
@@ -36,7 +35,7 @@
         android:layout_toEndOf="@id/checkBoxDone"
         android:orientation="vertical"
         android:visibility="visible"
-
+        android:backgroundTint="@color/white"
         app:cardCornerRadius="20dp">
 
         <LinearLayout
@@ -62,6 +61,7 @@
                 android:padding="10dp">
 
                 <TextView
+                    android:textColor="@color/primary_color"
                     android:id="@+id/text_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

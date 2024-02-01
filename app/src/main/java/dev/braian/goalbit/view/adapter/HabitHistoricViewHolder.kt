@@ -1,9 +1,7 @@
 package dev.braian.goalbit.view.adapter
 
-import android.graphics.Color
 import android.util.Log
 import androidx.core.content.ContextCompat
-import androidx.core.view.size
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
@@ -39,14 +37,16 @@ class HabitHistoricViewHolder(private val bind: HabitViewHistoricBinding) :
         val xValues = yearStreak.keys.toList().reversed()
 
         val xAxis = bind.lineChart.xAxis
+        xAxis.textColor = ContextCompat.getColor(itemView.context, R.color.habit_analytic_color)
         xAxis.position = XAxis.XAxisPosition.BOTTOM
         xAxis.valueFormatter = IndexAxisValueFormatter(xValues)
         xAxis.textSize = 15f
-
         xAxis.labelCount = 4
         xAxis.granularity = 1f
 
         val yAxis = bind.lineChart.axisLeft
+
+        yAxis.textColor =  ContextCompat.getColor(itemView.context, R.color.habit_analytic_color)
         yAxis.textSize = 15f
         yAxis.axisMinimum = 0f
         if (maxValue != null) {
@@ -56,15 +56,14 @@ class HabitHistoricViewHolder(private val bind: HabitViewHistoricBinding) :
         }
 
         yAxis.axisLineWidth = 2f
-        yAxis.axisLineColor = Color.BLACK
-
+        // Set the color for the left yAxis line
+        yAxis.axisLineColor = ContextCompat.getColor(itemView.context, R.color.habit_analytic_color)
         yAxis.labelCount = 6
 
+        // Add the year and the count of habits for each year
         var xValue = 0f
         val entries1: ArrayList<Entry> = ArrayList<Entry>()
-
         val reversedEntries = habitWithYearStreak.yearStreak.entries.toList().reversed()
-
         for ((year, count) in reversedEntries) {
             Log.d(
                 DataBaseConstants.TAG.HABIT_HISTORIC_VIEW_HOLDER,
@@ -74,20 +73,20 @@ class HabitHistoricViewHolder(private val bind: HabitViewHistoricBinding) :
             xValue++
         }
 
-        val l = bind.lineChart.legend
-        l.textColor = Color.BLACK
-        l.textSize = 15f
+        //legend label color "Habits completed"
+        val legend = bind.lineChart.legend
+        legend.textColor =  ContextCompat.getColor(itemView.context, R.color.habit_analytic_color)
+        legend.textSize = 15f
 
-
-        val dataSet1 = LineDataSet(entries1, "Completed habits")
+        //add entries with label
+        val dataSet1 = LineDataSet(entries1, "Habits completed")
         dataSet1.mode = LineDataSet.Mode.CUBIC_BEZIER
         dataSet1.setDrawFilled(true)
         dataSet1.valueTextSize = 15f
         dataSet1.formSize = 15f
-        dataSet1.fillColor = ContextCompat.getColor(itemView.context, R.color.secondary_color_alt)
+        dataSet1.valueTextColor = ContextCompat.getColor(itemView.context, R.color.habit_analytic_color)
 
         val lineData = LineData(dataSet1)
-
         bind.lineChart.data = lineData
         bind.lineChart.invalidate()
     }

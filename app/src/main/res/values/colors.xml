@@ -2,7 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="primary_color">#FFFFFFFF</color>
+    <color name="primary_color">#555555</color>
     <color name="secondary_color">#FFC8DD</color>
 
     <color name="secondary_color_alt">#A2D2FF</color>
@@ -14,4 +14,6 @@
     <color name="habit_finished">#F0F0F0</color>
 
     <color name="transparent">#00000000</color>
+
+    <color name="habit_analytic_color">#000000</color>
 </resources>

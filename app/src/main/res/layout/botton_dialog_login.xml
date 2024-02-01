@@ -6,6 +6,7 @@
     android:background="@color/transparent">
 
     <androidx.cardview.widget.CardView
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -19,6 +20,7 @@
             android:padding="28dp">
 
             <TextView
+                android:textColor="@color/primary_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/welcome"
@@ -26,6 +28,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:textColor="@color/primary_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.7"
