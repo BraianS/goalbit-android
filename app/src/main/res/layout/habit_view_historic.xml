@@ -6,21 +6,20 @@
     android:orientation="vertical">
 
     <TextView
-        android:textStyle="bold"
-        android:textSize="20sp"
-    android:paddingBottom="10sp"
-    android:id="@+id/textViewHabitName"
-    android:layout_width="match_parent"
+        android:id="@+id/textViewHabitName"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:paddingBottom="10sp"
+        android:text="@string/name"
         android:textColor="@color/habit_analytic_color"
-        android:text="@string/name" />
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/lineChart"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_below="@id/textViewHabitName"
-        />
+        android:layout_below="@id/textViewHabitName" />
 
 </RelativeLayout>

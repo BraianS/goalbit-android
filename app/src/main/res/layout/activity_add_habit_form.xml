@@ -4,18 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
+    android:padding="20dp"
     tools:context=".view.activities.AddHabitFormActivity">
 
     <TextView
-    android:textColor="@color/primary_color"
         android:id="@+id/text_habit_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:gravity="center"
-        android:paddingBottom="10dp"
         android:text="@string/create_a_new_habit"
+        android:textColor="@color/primary_color"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
@@ -42,7 +40,6 @@
             android:orientation="vertical">
 
             <EditText
-                android:textColorHint="@color/primary_color"
                 android:id="@+id/edit_name"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -52,11 +49,11 @@
                 android:hint="@string/name"
                 android:inputType="text"
                 android:padding="10dp"
+                android:textColorHint="@color/primary_color"
                 app:layout_constraintBottom_toTopOf="@id/edit_description"
                 app:layout_constraintTop_toBottomOf="@id/text_habit_name" />
 
             <EditText
-                android:textColorHint="@color/primary_color"
                 android:id="@+id/edit_description"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -66,6 +63,7 @@
                 android:hint="@string/description"
                 android:inputType="text"
                 android:padding="10dp"
+                android:textColorHint="@color/primary_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/edit_name" />
 
@@ -84,7 +82,6 @@
 
         <EditText
 
-            android:textColorHint="@color/primary_color"
             android:id="@+id/edit_reminder_timepick"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
@@ -98,6 +95,7 @@
             android:focusableInTouchMode="false"
             android:hint="@string/remind_me_at"
             android:inputType="time"
+            android:textColorHint="@color/primary_color"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/linearLayoutReminder" />
@@ -215,12 +213,12 @@
         app:layout_constraintTop_toBottomOf="@+id/child_group" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:textColorHint="@color/primary_color"
         android:id="@+id/textInputLayout"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/select"
+        android:textColorHint="@color/primary_color"
         app:layout_constraintTop_toBottomOf="@id/text_view_goal"
         tools:layout_editor_absoluteX="10dp">
 
@@ -240,41 +238,41 @@
         android:id="@+id/button_duration_pick"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/select_the_timer"
         android:backgroundTint="@color/secondary_color_alt"
+        android:text="@string/select_the_timer"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textInputLayout" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:textColorHint="@color/primary_color"
         android:id="@+id/text_layout_range_layout"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/select_end_date"
+        android:textColorHint="@color/primary_color"
         app:layout_constraintTop_toBottomOf="@id/button_duration_pick"
         tools:layout_editor_absoluteX="10dp">
 
         <AutoCompleteTextView
 
-            android:textColorHint="@color/primary_color"
             android:id="@+id/auto_complete_range_date_pick"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_input"
             android:focusable="false"
-            android:focusableInTouchMode="false" />
+            android:focusableInTouchMode="false"
+            android:textColorHint="@color/primary_color" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:backgroundTint="@color/secondary_color_alt"
-        android:textColor="@color/white"
         android:id="@+id/button_create_habit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:backgroundTint="@color/secondary_color_alt"
         android:text="@string/create_a_habit"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_layout_range_layout" />

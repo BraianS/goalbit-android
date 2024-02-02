@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/ic_wave"
-    android:padding="10dp"
+    android:padding="20dp"
     tools:context=".view.fragment.HomeFragment">
 
     <TextView
