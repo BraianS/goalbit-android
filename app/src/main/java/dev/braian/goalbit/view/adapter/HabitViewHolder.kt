@@ -157,7 +157,8 @@ class HabitViewHolder(private val bind: HabitViewBinding, private val listener: 
             }
 
             if (habit.goal == GoalType.Duration) {
-                if (dailyActivity?.done == false) {
+
+                if (dailyActivity?.done == false || dailyActivity == null) {
                     ViewAnimationUtil.animateAndMakeVisible(bind.cardBackDuration)
                     bind.checkBoxDone.visibility = View.INVISIBLE
                     bind.checkBowToggleTimer.visibility = View.VISIBLE
