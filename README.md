@@ -4,25 +4,30 @@ App for create your habits and count timer to register your times
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
 ### Prerequisites
 
-You need `Java 17`, `Firebase Account` to sign with anonymous account and Login with Google account
-
-```
-Give examples
-```
+You need `Java 17`, `Android Studio`, `Firebase Account` to sign with anonymous account and Login with Google account
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+### Step 1: Create a Firebase Project
+1. Go to the [Firebase Console](https://console.firebase.google.com/).
+2. Click on "Add Project" and follow the setup instructions.
 
-* Install Android Studio
-* Select tab `Tools`, `Firebase`, `Realtime Database` to add Database and later select `Authentication Google and Anonymous` to login and use the app
+### Step 2: Add your Android App to Firebase
+1. In the Firebase Console, click on your project.
+2. Click on "Add app" and select the Android icon.
+3. Follow the setup instructions, providing the necessary details like package name.
 
+### Step 3: Download the Configuration File
+1. After adding your app, click on "Download google-services.json" and place it in your `app` directory of the Android Studio project.
 
-End with an example of getting some data out of the system or using it for a little demo
+### Result
+
+![1](/assets/1.jpg)
+![2](/assets/2.jpg)
+![3](/assets/3.jpg)
+![5](/assets/4.jpg)
 
 ## Built With
 
