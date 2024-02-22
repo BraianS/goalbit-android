@@ -49,7 +49,7 @@ class NotificationHelper(private val context: Context) {
             context,
             habitId,
             intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            PendingIntent.FLAG_UPDATE_CURRENT
         )
 
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -70,20 +70,11 @@ class NotificationHelper(private val context: Context) {
         val nextDayTime = nextDay.timeInMillis
         Log.i(DataBaseConstants.TAG.ADD_HABIT_FORM_ACTIVITY, "Time in millis: $nextDayTime")
 
-        if (Build.VERSION.SDK_INT >= 23) {
-            alarmManager.setExactAndAllowWhileIdle(
+            alarmManager.setInexactRepeating(
                 AlarmManager.RTC_WAKEUP,
                 nextDayTime,
-                pendingIntent
+                AlarmManager.INTERVAL_DAY, pendingIntent
             )
-        } else if (Build.VERSION.SDK_INT >= 19) {
-            alarmManager.setExact(
-                AlarmManager.RTC_WAKEUP,
-                nextDayTime,
-                pendingIntent
-            )
-        } else {
-            alarmManager[AlarmManager.RTC_WAKEUP, nextDayTime] = pendingIntent
-        }
+
     }
 }
