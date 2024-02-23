@@ -41,11 +41,4 @@ class HabitAdapter : RecyclerView.Adapter<HabitViewHolder>() {
         listener = habitListener
     }
 
-    override fun onViewRecycled(holder: HabitViewHolder) {
-        super.onViewRecycled(holder)
-        if(holder.counterDownTimer != null) {
-            holder.counterDownTimer!!.cancel()
-        }
-    }
-
 }

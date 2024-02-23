@@ -20,13 +20,19 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-            android:theme="@style/Base.Theme.Goalbit"
+        android:theme="@style/Base.Theme.Goalbit"
         tools:targetApi="31">
+        <activity
+            android:name=".view.activities.CountDownActivity"
+            android:exported="false"
+            android:label="@string/title_activity_count_down_timer"
+            android:theme="@style/Base.Theme.Goalbit" />
 
-        <receiver android:name=".utils.HabitReminderReceiver"
+        <receiver
+            android:name=".utils.HabitReminderReceiver"
             android:exported="false">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
@@ -41,8 +47,8 @@
             android:exported="false" />
         <activity
             android:name=".view.activities.MainActivity"
-            android:theme="@style/Theme.App.SplashScreen"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.App.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -50,4 +56,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

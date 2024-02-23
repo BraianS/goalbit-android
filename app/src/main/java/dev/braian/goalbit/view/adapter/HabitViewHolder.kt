@@ -1,15 +1,11 @@
 package dev.braian.goalbit.view.adapter
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.content.Context
-import android.os.CountDownTimer
-import android.util.Log
+import android.content.Intent
+import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
-import dev.braian.goalbit.R
 import dev.braian.goalbit.utils.App
 import dev.braian.goalbit.constants.DataBaseConstants
 import dev.braian.goalbit.databinding.HabitViewBinding
@@ -21,16 +17,15 @@ import dev.braian.goalbit.model.Habit
 import dev.braian.goalbit.view.viewholder.HabitViewModel
 import dev.braian.goalbit.utils.DurationTimeUtil
 import dev.braian.goalbit.utils.ColorUtils
-import dev.braian.goalbit.utils.ViewAnimationUtil
+import dev.braian.goalbit.utils.DateFormatUtils
+import dev.braian.goalbit.view.activities.CountDownActivity
 import java.time.LocalDate
 
 class HabitViewHolder(private val bind: HabitViewBinding, private val listener: OnHabitListener) :
     RecyclerView.ViewHolder(bind.root) {
 
-    private var timerRunning: Boolean = false
-    var counterDownTimer: CountDownTimer? = null
     private val context: Context = itemView.context
-    private var millisInFuture: Long = 0
+
     private lateinit var newDuration: DurationTimer
     private lateinit var selectedDate: LocalDate
     private var habitId: String = ""
@@ -40,7 +35,7 @@ class HabitViewHolder(private val bind: HabitViewBinding, private val listener: 
 
     private fun setTextDurationAndTime(durationTimer: DurationTimer) {
         bind.textDuration.text = DurationTimeUtil.formatStringTime(durationTimer)
-        bind.textTimerDuration.text = DurationTimeUtil.formatStringTime(durationTimer)
+
     }
 
     private fun updateDailyActivity(done: Boolean) {
@@ -69,10 +64,8 @@ class HabitViewHolder(private val bind: HabitViewBinding, private val listener: 
 
         if (habit.goal == GoalType.Duration) {
 
-            timerRunning = false
-            bind.countDownButton.text = context.getString(R.string.start)
 
-            countDownTimer()
+
             bind.textDuration.visibility = View.VISIBLE
 
             if (dailyActivity == null) {
@@ -90,12 +83,8 @@ class HabitViewHolder(private val bind: HabitViewBinding, private val listener: 
             if (dailyActivity?.done == true) {
                 bind.checkBoxDone.isChecked = true
                 newDuration = dailyActivity.duration
-                ViewAnimationUtil.animateAndMakeInvisible(bind.cardBackDuration)
                 ColorUtils.setHabitChecked(bind.cardView, itemView.context)
             }
-
-            millisInFuture =
-                (newDuration.hour!!.toLong() * 60 * 60 + newDuration.minute!!.toLong() * 60 + newDuration.second!!.toLong()) * 1000
 
             setTextDurationAndTime(newDuration)
         }
@@ -106,8 +95,6 @@ class HabitViewHolder(private val bind: HabitViewBinding, private val listener: 
         auth = FirebaseAuth.getInstance()
 
         habitViewModel = HabitViewModel()
-
-        ViewAnimationUtil.animateAndMakeInvisible(bind.cardBackDuration)
 
         this.selectedDate = selectedDate
         val habit = habitWithDailyActivity.first
@@ -128,9 +115,6 @@ class HabitViewHolder(private val bind: HabitViewBinding, private val listener: 
             bind.checkBoxDone.isClickable = true
             bind.checkBoxDone.isChecked = true
         }
-
-        bind.checkBowToggleTimer.visibility = View.INVISIBLE
-        bind.checkBowToggleTimer.isChecked = false
 
         val iconPack = (context.applicationContext as App).iconPack
 
@@ -159,129 +143,37 @@ class HabitViewHolder(private val bind: HabitViewBinding, private val listener: 
             if (habit.goal == GoalType.Duration) {
 
                 if (dailyActivity?.done == false || dailyActivity == null) {
-                    ViewAnimationUtil.animateAndMakeVisible(bind.cardBackDuration)
                     bind.checkBoxDone.visibility = View.INVISIBLE
-                    bind.checkBowToggleTimer.visibility = View.VISIBLE
+
+                    val intent = Intent(context, CountDownActivity::class.java)
+
+                    val bundle = Bundle()
+                    bundle.putString(DataBaseConstants.HABIT.NAME, habit.name)
+                    bundle.putString(DataBaseConstants.HABIT.ID, habit.id)
+                    bundle.putString(DataBaseConstants.HABIT.SELECTED_DATE, DateFormatUtils.formatDate(selectedDate))
+
+
+                    val hour = newDuration.hour
+                    val minute = newDuration.minute
+                    val second = newDuration.second
+                    if (hour != null) {
+                        bundle.putInt(DataBaseConstants.HABIT.HOUR, hour)
+                    }
+                    if (minute != null) {
+                        bundle.putInt(DataBaseConstants.HABIT.MINUTE, minute)
+                    }
+                    if (second != null) {
+                        bundle.putInt(DataBaseConstants.HABIT.SECOND,second)
+                    }
+
+                    intent.putExtras(bundle)
+
+                    context.startActivity(intent)
 
                 } else if (dailyActivity?.done == true) {
                     updateDailyActivity(false)
                 }
-            }
-
-            bind.finalizeTimerButton.setOnClickListener {
-                counterDownTimer?.cancel()
-                bind.countDownButton.text = context.getString(R.string.start)
-                timerRunning = false
-                updateTimer()
-
-                habitViewModel.finishDailyActivity(
-                    habit.id!!,
-                    selectedDate,
-                    DurationTimer(0, 0, 0), true
-                )
-
-                bind.checkBoxDone.visibility = View.VISIBLE
-                ViewAnimationUtil.animateAndMakeInvisible(bind.cardBackDuration)
-                ColorUtils.setHabitChecked(bind.cardView, itemView.context)
-            }
-
-            bind.checkBowToggleTimer.setOnClickListener {
-                if (bind.checkBowToggleTimer.isChecked) {
-                    bind.checkBowToggleTimer.visibility = View.INVISIBLE
-                    bind.checkBoxDone.isChecked = false
-                    bind.checkBoxDone.visibility = View.VISIBLE
-
-                    bind.cardBackDuration.animate()
-                        .translationX(bind.cardBackDuration.width.toFloat())
-                        .setDuration(300)
-                        .setListener(object : AnimatorListenerAdapter() {
-                            override fun onAnimationEnd(animation: Animator) {
-                                super.onAnimationEnd(animation)
-                                bind.cardBackDuration.visibility = View.INVISIBLE
-                            }
-                        })
-                    bind.checkBowToggleTimer.isChecked = false
-                }
-            }
-
-            bind.countDownButton.setOnClickListener {
-                if (timerRunning) {
-                    counterDownTimer?.cancel()
-                    bind.countDownButton.text = context.getString(R.string.start)
-                    timerRunning = false
-                    Toast.makeText(
-                        context,
-                        "Pausado,  timeRunning: $timerRunning",
-                        Toast.LENGTH_LONG
-                    ).show()
-
-                    habitViewModel.saveDailyDuration(habitId, selectedDate, newDuration)
-
-                } else {
-                    Toast.makeText(
-                        context,
-                        "Continuou, timeRunning: $timerRunning",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    start()
-                    bind.countDownButton.setOnLongClickListener { it ->
-                        habitViewModel.saveDailyDuration(habitId, selectedDate, newDuration)
-                        bind.countDownButton.text = context.getString(R.string.save)
-                        timerRunning = false
-                        bind.checkBowToggleTimer.visibility = View.INVISIBLE
-                        bind.checkBowToggleTimer.isChecked = false
-                        bind.checkBoxDone.visibility = View.VISIBLE
-                        bind.checkBoxDone.isChecked = false
-                        true
-                    }
-                }
-            }
+            }}
         }
-    }
 
-    private fun countDownTimer() {
-        counterDownTimer = object : CountDownTimer(millisInFuture, 1000) {
-            override fun onTick(l: Long) {
-                millisInFuture = l
-            }
-
-            override fun onFinish() {
-                Toast.makeText(context, "Countdown terminou", Toast.LENGTH_LONG).show()
-                habitViewModel.saveDailyDuration(habitId, selectedDate, newDuration)
-            }
-        }
-    }
-
-    private fun start() {
-        counterDownTimer = object : CountDownTimer(millisInFuture, 1000) {
-            override fun onTick(l: Long) {
-                millisInFuture = l
-                updateTimer()
-            }
-
-            override fun onFinish() {
-                habitViewModel.finishDailyActivity(habitId, selectedDate, newDuration, true)
-                updateTimer()
-            }
-        }.start()
-
-        bind.countDownButton.text = context.getString(R.string.pause)
-        timerRunning = true
-    }
-
-    fun updateTimer() {
-        Log.d(
-            DataBaseConstants.TAG.HABIT_VIEW_HOLDER,
-            "timerRunning: $timerRunning millisInFuture:  $millisInFuture"
-        )
-
-        val remainingMillis = millisInFuture
-
-        val hours = remainingMillis / (60 * 60 * 1000)
-        val minutes = remainingMillis % (60 * 60 * 1000) / (60 * 1000)
-        val seconds = remainingMillis % (60 * 1000) / 1000
-
-        newDuration.addTimeStamp(hours.toInt(), minutes.toInt(), seconds.toInt())
-        bind.textTimerDuration.text = DurationTimeUtil.formatTime(hours, minutes, seconds)
-    }
 }

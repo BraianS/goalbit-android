@@ -5,6 +5,11 @@ class DataBaseConstants private constructor() {
     object HABIT {
         const val ID = "id"
         const val NAME = "name"
+        const val DURATION = "00:00:00"
+        const val HOUR = "hour"
+        const val MINUTE = "minute"
+        const val SECOND = "second"
+        const val SELECTED_DATE = "selected_date"
     }
 
     object TAG {

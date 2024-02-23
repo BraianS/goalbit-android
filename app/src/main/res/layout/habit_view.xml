@@ -11,17 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-
         android:gravity="center" />
-
-    <CheckBox
-        android:id="@+id/checkBowToggleTimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:button="@drawable/baseline_keyboard_arrow_right_24"
-
-        android:visibility="invisible" />
 
     <!--para testar a barra toggle arrow -->
     <androidx.cardview.widget.CardView
@@ -94,53 +84,5 @@
 
     </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardBackDuration"
 
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginBottom="2dp"
-        android:layout_toEndOf="@id/checkBoxDone"
-        android:orientation="vertical"
-        android:visibility="invisible"
-
-        app:cardBackgroundColor="@color/secondary_color"
-        app:cardCornerRadius="20dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="5dp">
-
-            <TextView
-                android:id="@+id/textTimerDuration"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-
-                android:gravity="center"
-                android:text="@string/timeStamp"
-                android:textSize="30sp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/countDownButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="10dp"
-                android:text="@string/start" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/finalizeTimerButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/button_done"
-                android:text="@string/done" />
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
 </RelativeLayout>
